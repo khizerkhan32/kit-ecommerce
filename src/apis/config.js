@@ -22,4 +22,4 @@ const useAPI = (api) => {
   return [fetch_function, loading];
 };
 
-export { APIS, useAPI, baseModule }; //working
+export { APIS, useAPI, baseModule };
