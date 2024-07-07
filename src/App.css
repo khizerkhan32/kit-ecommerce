@@ -11,8 +11,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 36px;
-  gap: 26px;
+  margin-top: 60px;
+  margin-bottom: 46px;
+  gap: 40px;
 }
 .button-con {
   display: flex;

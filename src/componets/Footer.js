@@ -1,7 +1,5 @@
 import { VscSend } from 'react-icons/vsc';
 import { QRCode } from 'antd';
-import playstore from '../assects/play-store.svg';
-import applestore from '../assects/apple store.svg';
 import { RiFacebookLine } from 'react-icons/ri';
 import { FiTwitter } from 'react-icons/fi';
 import { LuInstagram } from 'react-icons/lu';
@@ -87,7 +85,9 @@ function Footer() {
             <h2>Download App</h2>
           </div>
           <div>
-            <h4>Save $3 with App New User Only</h4>
+            <h4 style={{ color: 'rgb(245, 245, 245, 0.5)' }}>
+              Save $3 with App New User Only
+            </h4>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div>
@@ -97,7 +97,7 @@ function Footer() {
                   padding: '0px',
                   height: '80px',
                   width: '80px',
-                  borderRadius: '4px',
+                  borderRadius: '2px',
                 }}
                 errorLevel={'Q'}
                 value="khizerkhan E-commers web/REAct.js "
@@ -107,10 +107,10 @@ function Footer() {
               style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}
             >
               <div>
-                <img src={playstore} alt="playsstore" />
+                <img src={'/images/play-store.svg'} alt="playsstore" />
               </div>
               <div>
-                <img src={applestore} alt="playsstore" />
+                <img src={'/images/apple-store.svg'} alt="playsstore" />
               </div>
             </div>
           </div>
@@ -130,12 +130,20 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className='copyrigth-con' >
-        <div>
+      <div className="copyrigth-con">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            height: '44px',
+          }}
+        >
           <div>
             <FaRegCopyright style={{ height: '20px', width: '20px' }} />
           </div>
-          <div>Copyright Khizer 2023. All right reserved</div>
+          <div>Copyright Rimel 2022. All right reserved</div>
         </div>
       </div>
     </div>
