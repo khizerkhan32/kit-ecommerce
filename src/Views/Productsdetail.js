@@ -4,10 +4,12 @@ import Header from '../componets/Header';
 import Products from '../componets/Products';
 import Productstwo from '../componets/Productstwo';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Productsdetail() {
   const [sliceIndexes, setSliceIndexes] = useState({ start: 10, end: 14 });
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const handleSeeAllClick = () => {
     if (isExpanded) {
@@ -17,6 +19,11 @@ function Productsdetail() {
     }
     setIsExpanded(!isExpanded);
     console.log('working');
+  };
+
+  const SingleProduct = (id) => {
+    console.log('working ' + id);
+    navigate(`/SingleProduct/${id}`);
   };
 
   // useEffect(() => {
@@ -35,7 +42,7 @@ function Productsdetail() {
             <Buttonone width={206}>Move All To Bag</Buttonone>
           </div>
         </div>
-        <Products />
+        <Products onClick={SingleProduct} />
         <div className="button-con">
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <div
@@ -54,7 +61,10 @@ function Productsdetail() {
             </Buttonone>
           </div>
         </div>
-        <Productstwo sliceIndexes={sliceIndexes} />
+        <Productstwo
+          sliceIndexes={sliceIndexes}
+          onProductClick={SingleProduct}
+        />
       </div>
       <Footer />
     </div>

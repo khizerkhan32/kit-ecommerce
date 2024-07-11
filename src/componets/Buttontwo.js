@@ -1,3 +1,4 @@
+import { IoCartOutline } from 'react-icons/io5';
 function Buttonone(props) {
   const { children, width, onClick } = props;
   return (
@@ -13,10 +14,14 @@ function Buttonone(props) {
         fontWeight: '500',
         fontSize: '16px',
         cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '4px',
       }}
       onClick={onClick}
     >
-      {children}
+      <IoCartOutline style={{ height: '22px', width: '22px' }} /> {children}
     </button>
   );
 }

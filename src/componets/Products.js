@@ -11,7 +11,8 @@ const contentStyle = {
 };
 const content = <div style={contentStyle} />;
 
-const Products = () => {
+const Products = (props) => {
+  const { onClick } = props;
   const [allitems, setAllItems] = useState([]);
   const [get_all_items, loading] = useAPI(APIS.get_all_items);
 
@@ -45,6 +46,7 @@ const Products = () => {
       ) : (
         allitems.map((products, index) => {
           const firstImageUrl = products.images[0];
+          const id = products.id; // Assuming products have an 'id' field
 
           return (
             <div
@@ -85,7 +87,7 @@ const Products = () => {
                   </div>
                 </div>
               </div>
-              <Buttontwo>Add to Cart</Buttontwo>
+              <Buttontwo onClick={() => onClick(id)}>Add to Cart</Buttontwo>
               <div className="price-tag">
                 <div>
                   <p className="product_name">{products.title}</p>

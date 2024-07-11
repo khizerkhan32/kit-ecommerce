@@ -13,7 +13,7 @@ const contentStyle = {
 const content = <div style={contentStyle} />;
 
 const Productstwo = (props) => {
-  const { sliceIndexes } = props;
+  const { sliceIndexes, onProductClick } = props;
   const [allitems2, setAllItems2] = useState([]);
   const [get_all_items, loading] = useAPI(APIS.get_all_items);
 
@@ -94,7 +94,11 @@ const Productstwo = (props) => {
                   </div>
                 </div>
               </div>
-              <Buttontwo>Add to Cart</Buttontwo>
+
+              <Buttontwo onClick={() => onProductClick(products.id)}>
+                Add to Cart
+              </Buttontwo>
+
               <div className="price-tag">
                 <div>
                   <p className="product_name">{products.title}</p>
