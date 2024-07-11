@@ -54,6 +54,7 @@ const Productstwo = (props) => {
           return (
             <div
               key={index}
+              className="hoverme"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -95,9 +96,11 @@ const Productstwo = (props) => {
                 </div>
               </div>
 
-              <Buttontwo onClick={() => onProductClick(products.id)}>
-                Add to Cart
-              </Buttontwo>
+              <div className="add-to-cart-button">
+                <Buttontwo onClick={() => onProductClick(products.id)}>
+                  Add to Cart
+                </Buttontwo>
+              </div>
 
               <div className="price-tag">
                 <div>

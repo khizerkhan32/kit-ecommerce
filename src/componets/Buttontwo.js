@@ -18,6 +18,7 @@ function Buttonone(props) {
         justifyContent: 'center',
         alignItems: 'center',
         gap: '4px',
+        width: '100%',
       }}
       onClick={onClick}
     >
