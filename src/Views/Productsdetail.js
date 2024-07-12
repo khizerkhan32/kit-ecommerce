@@ -15,7 +15,7 @@ function Productsdetail() {
     if (isExpanded) {
       setSliceIndexes({ start: 10, end: 14 });
     } else {
-      setSliceIndexes({ start: 10, end: 26 });
+      setSliceIndexes({ start: 6, end: 26 });
     }
     setIsExpanded(!isExpanded);
     console.log('working');

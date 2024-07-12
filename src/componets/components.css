@@ -169,3 +169,16 @@
   transform: translateY(-30%);
   opacity: 1;
 }
+
+.Single-para {
+  color: rgb(245, 245, 245, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+.backgroud-Image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: 'no-repeat';
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
