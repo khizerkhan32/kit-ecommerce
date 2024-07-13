@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
 import { useParams } from 'react-router-dom';
-import { Flex, Spin } from 'antd';
+import { Flex, Spin, Radio } from 'antd';
+import { Rate } from 'antd';
 
 const contentStyle = {
   padding: 50,
@@ -19,6 +20,7 @@ function Productbyid() {
   });
   const [get_Product_by_id, loading] = useAPI(APIS.get_Product_by_id);
   const [mainImageUrl, setMainImageUrl] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
 
   useEffect(() => {
     get_Product_by_id(params.id)
@@ -38,6 +40,9 @@ function Productbyid() {
 
   const handleImageClick = (imageUrl) => {
     setMainImageUrl(imageUrl);
+  };
+  const handleColorChange = (e) => {
+    setSelectedColor(e.target.value);
   };
 
   return (
@@ -70,7 +75,7 @@ function Productbyid() {
               alignItems: 'center',
             }}
           >
-            <div style={{ display: 'flex', width: '60%' }}>
+            <div style={{ display: 'flex', width: '60%', gap: '16px' }}>
               <div
                 style={{
                   display: 'flex',
@@ -128,21 +133,90 @@ function Productbyid() {
                   ></div>
                 )}
               </div>
-              <div style={{ display: 'flex', width: '65%', height: '600px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  width: '66.5%',
+                  height: '600px',
+                  backgroundColor: '#f5f5f5',
+                  alignItems: 'center',
+                }}
+              >
                 {mainImageUrl && (
                   <div
                     className="backgroud-Image"
                     style={{
                       backgroundImage: `url(${mainImageUrl})`,
                       width: '100%',
-                      height: '100%',
+                      height: '490px',
                     }}
                   ></div>
                 )}
               </div>
             </div>
 
-            <div style={{ display: ' flex', width: '40%' }}>content</div>
+            <div
+              style={{
+                display: ' flex',
+                width: '40%',
+                flexDirection: 'column',
+              }}
+            >
+              <div>
+                <h2>{productone.title}</h2>
+              </div>
+              <div>
+                <div style={{ display: 'flex' }}>
+                  <Rate
+                    disabled
+                    defaultValue={productone.rating}
+                    style={{ color: '#FFAD33' }}
+                  />
+                  <p>
+                    ({productone.stock} Reviews) | <span>In stock</span>
+                  </p>
+                </div>
+              </div>
+              <div>${productone.price}</div>
+              <div className="description">{productone.description}</div>
+              <div>
+                Color:
+                <Radio.Group
+                  onChange={handleColorChange}
+                  value={selectedColor}
+                  style={{ marginLeft: 10 }}
+                >
+                  <Radio.Button
+                    value="color1"
+                    style={{
+                      backgroundColor:
+                        selectedColor === 'color1' ? '#E07575' : '#A0BCE0',
+                      borderColor:
+                        selectedColor === 'color1' ? '#E07575' : '#A0BCE0',
+                      width: '20px',
+                      height: '20px',
+                      borderRadius: '50%',
+                      border: '1px solid black',
+                      padding: '0',
+                    }}
+                  ></Radio.Button>
+                  <Radio.Button
+                    value="color2"
+                    style={{
+                      backgroundColor:
+                        selectedColor === 'color2' ? '#E07575' : '#A0BCE0',
+                      borderColor:
+                        selectedColor === 'color2' ? '#E07575' : '#A0BCE0',
+                      width: '20px',
+                      height: '20px',
+                      borderRadius: '50%',
+                      border: '1px solid black',
+                      padding: '0',
+                    }}
+                  ></Radio.Button>
+                </Radio.Group>
+              </div>
+            </div>
           </div>
         </div>
       )}

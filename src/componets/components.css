@@ -182,3 +182,7 @@
   background-color: #f5f5f5;
   border-radius: 4px;
 }
+.description {
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
