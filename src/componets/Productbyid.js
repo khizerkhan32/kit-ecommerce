@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
 import { useParams } from 'react-router-dom';
-import { Flex, Spin, Radio } from 'antd';
+import { Button, Flex, Spin } from 'antd';
 import { Rate } from 'antd';
+import Radiobutton from './Radiobutton';
+import Productsize from './Productsize';
+import { HiOutlinePlus } from 'react-icons/hi2';
+import { GoDash } from 'react-icons/go';
+import { FaRegHeart } from 'react-icons/fa6';
 
 const contentStyle = {
   padding: 50,
@@ -20,7 +25,6 @@ function Productbyid() {
   });
   const [get_Product_by_id, loading] = useAPI(APIS.get_Product_by_id);
   const [mainImageUrl, setMainImageUrl] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
 
   useEffect(() => {
     get_Product_by_id(params.id)
@@ -40,9 +44,6 @@ function Productbyid() {
 
   const handleImageClick = (imageUrl) => {
     setMainImageUrl(imageUrl);
-  };
-  const handleColorChange = (e) => {
-    setSelectedColor(e.target.value);
   };
 
   return (
@@ -180,41 +181,55 @@ function Productbyid() {
               <div>${productone.price}</div>
               <div className="description">{productone.description}</div>
               <div>
-                Color:
-                <Radio.Group
-                  onChange={handleColorChange}
-                  value={selectedColor}
-                  style={{ marginLeft: 10 }}
+                <Radiobutton />
+              </div>
+              <div>
+                <Productsize />
+              </div>
+              <div style={{ display: 'flex' }}>
+                <Button className="multiple">
+                  <GoDash style={{ width: '24px', height: '24px' }} />
+                </Button>
+                <div className="buy-number">1</div>
+                <Button className="multiple">
+                  <HiOutlinePlus style={{ width: '24px', height: '24px' }} />
+                </Button>
+                <Button
+                  style={{
+                    height: '44px',
+                    width: '164px',
+                    background: '#DB4444',
+                    color: 'white',
+                  }}
                 >
-                  <Radio.Button
-                    value="color1"
-                    style={{
-                      backgroundColor:
-                        selectedColor === 'color1' ? '#E07575' : '#A0BCE0',
-                      borderColor:
-                        selectedColor === 'color1' ? '#E07575' : '#A0BCE0',
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      border: '1px solid black',
-                      padding: '0',
-                    }}
-                  ></Radio.Button>
-                  <Radio.Button
-                    value="color2"
-                    style={{
-                      backgroundColor:
-                        selectedColor === 'color2' ? '#E07575' : '#A0BCE0',
-                      borderColor:
-                        selectedColor === 'color2' ? '#E07575' : '#A0BCE0',
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      border: '1px solid black',
-                      padding: '0',
-                    }}
-                  ></Radio.Button>
-                </Radio.Group>
+                  Buy Now
+                </Button>
+                <Button className="heartbutton">
+                  <FaRegHeart style={{ width: '22px', height: '22px' }} />
+                </Button>
+              </div>
+              <div className="delivery">
+                <div className="dilevry-con">
+                  <div>
+                    <img
+                      src={'/images/icon-delivery.svg'}
+                      alt="delivery truck"
+                    />
+                  </div>
+                  <div>
+                    <h3>Free Delivery</h3>
+                    <p>Enter your postal code for Delivery Availability</p>
+                  </div>
+                </div>
+                <div className="dilevry-con">
+                  <div>
+                    <img src={'/images/icon-return.svg'} alt="return Icon" />
+                  </div>
+                  <div>
+                    <h3>Return Delivery</h3>
+                    <p>Free 30 Days Delivery Returns. Details</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

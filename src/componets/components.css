@@ -186,3 +186,41 @@
   padding-bottom: 26px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
+.multiple {
+  width: 40px;
+  height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buy-number {
+  width: 80px;
+  height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.heartbutton {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+.delivery {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dilevry-con {
+  display: flex;
+  width: 82%;
+  margin: 19px 0px;
+
+  gap: 14px;
+}
