@@ -161,6 +161,7 @@ function Productbyid() {
                 display: ' flex',
                 width: '40%',
                 flexDirection: 'column',
+                gap: '22px',
               }}
             >
               <div>
