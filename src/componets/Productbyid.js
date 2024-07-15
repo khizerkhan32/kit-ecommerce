@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
 import { useParams } from 'react-router-dom';
-import { Button, Flex, Spin } from 'antd';
-import { Rate } from 'antd';
+import { Button, Flex, Spin, Rate } from 'antd';
 import Radiobutton from './Radiobutton';
 import Productsize from './Productsize';
 import { HiOutlinePlus } from 'react-icons/hi2';
@@ -25,6 +24,8 @@ function Productbyid() {
   });
   const [get_Product_by_id, loading] = useAPI(APIS.get_Product_by_id);
   const [mainImageUrl, setMainImageUrl] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     get_Product_by_id(params.id)
@@ -46,6 +47,21 @@ function Productbyid() {
     setMainImageUrl(imageUrl);
   };
 
+  const increaseQuantity = () => {
+    if (quantity < productone.stock) {
+      setQuantity(quantity + 1);
+    } else {
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 5000);
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <div style={{ display: 'flex', width: '80%' }}>
       {loading ? (
@@ -59,12 +75,11 @@ function Productbyid() {
           </Flex>
         </div>
       ) : (
-        <div
-          style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
-        >
+        <div className="sigle-product">
           <div>
-            <p>
-              Account / {productone.category} / {productone.title}
+            <p className="signle-Account">
+              Account / {productone.category} /
+              <span style={{ color: 'black' }}> {productone.title}</span>
             </p>
           </div>
 
@@ -76,7 +91,7 @@ function Productbyid() {
               alignItems: 'center',
             }}
           >
-            <div style={{ display: 'flex', width: '60%', gap: '16px' }}>
+            <div className="single-left">
               <div
                 style={{
                   display: 'flex',
@@ -156,30 +171,24 @@ function Productbyid() {
               </div>
             </div>
 
-            <div
-              style={{
-                display: ' flex',
-                width: '40%',
-                flexDirection: 'column',
-                gap: '22px',
-              }}
-            >
-              <div>
+            <div className="single-Right">
+              <div className="title-div">
                 <h2>{productone.title}</h2>
               </div>
               <div>
-                <div style={{ display: 'flex' }}>
+                <div className="star-con">
                   <Rate
                     disabled
                     defaultValue={productone.rating}
                     style={{ color: '#FFAD33' }}
                   />
-                  <p>
-                    ({productone.stock} Reviews) | <span>In stock</span>
+                  <p className="signle-Account">
+                    ({productone.stock} Reviews) &ensp; | &ensp;
+                    <span style={{ color: '#00FF66' }}>In stock</span>
                   </p>
                 </div>
               </div>
-              <div>${productone.price}</div>
+              <div className="prices">${productone.price}</div>
               <div className="description">{productone.description}</div>
               <div>
                 <Radiobutton />
@@ -187,28 +196,40 @@ function Productbyid() {
               <div>
                 <Productsize />
               </div>
-              <div style={{ display: 'flex' }}>
-                <Button className="multiple">
-                  <GoDash style={{ width: '24px', height: '24px' }} />
-                </Button>
-                <div className="buy-number">1</div>
-                <Button className="multiple">
-                  <HiOutlinePlus style={{ width: '24px', height: '24px' }} />
-                </Button>
-                <Button
-                  style={{
-                    height: '44px',
-                    width: '164px',
-                    background: '#DB4444',
-                    color: 'white',
-                  }}
-                >
-                  Buy Now
-                </Button>
+              <div className="buy-div">
+                <div style={{ display: 'flex' }}>
+                  <Button
+                    className="multiple"
+                    style={{
+                      borderTopRightRadius: '0px',
+                      borderBottomRightRadius: '0px',
+                    }}
+                    onClick={decreaseQuantity}
+                  >
+                    <GoDash style={{ width: '24px', height: '24px' }} />
+                  </Button>
+                  <div className="buy-number">{quantity}</div>
+                  <Button
+                    className="multiple"
+                    style={{
+                      borderTopLeftRadius: '0px',
+                      borderBottomLeftRadius: '0px',
+                    }}
+                    onClick={increaseQuantity}
+                  >
+                    <HiOutlinePlus style={{ width: '24px', height: '24px' }} />
+                  </Button>
+                </div>
+                <Button className="buy-btn">Buy Now</Button>
                 <Button className="heartbutton">
                   <FaRegHeart style={{ width: '22px', height: '22px' }} />
                 </Button>
               </div>
+              {showPopup && (
+                <div className="Limited-mesge">
+                  Limited stock. No more available.
+                </div>
+              )}
               <div className="delivery">
                 <div className="dilevry-con">
                   <div>

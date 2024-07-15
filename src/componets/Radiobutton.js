@@ -7,13 +7,9 @@ const Radiobutton = () => {
     setSelectedColor(e.target.value);
   };
   return (
-    <div>
-      Color:
-      <Radio.Group
-        onChange={handleColorChange}
-        value={selectedColor}
-        style={{ marginLeft: 10 }}
-      >
+    <div className="radiobutton">
+      Colours:
+      <Radio.Group onChange={handleColorChange} value={selectedColor}>
         <Radio.Button
           value="color1"
           style={{
@@ -24,6 +20,7 @@ const Radiobutton = () => {
             borderRadius: '50%',
             border: '1px solid black',
             padding: '0',
+            marginRight: '10px',
           }}
         ></Radio.Button>
         <Radio.Button

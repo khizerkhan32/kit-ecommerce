@@ -185,6 +185,8 @@
 .description {
   padding-bottom: 26px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
 }
 .multiple {
   width: 40px;
@@ -193,6 +195,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px;
+}
+.sigle-product .single-Right .buy-div .multiple:hover {
+  background: #db4444;
+  color: #ffffff;
+  border: none;
 }
 .buy-number {
   width: 80px;
@@ -201,6 +209,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
 }
 .heartbutton {
   display: flex;
@@ -209,6 +220,11 @@
   justify-content: center;
   align-items: center;
   padding: 0px;
+}
+.sigle-product .single-Right .buy-div .heartbutton:hover {
+  background: #db4444;
+  color: #ffffff;
+  border: none;
 }
 .delivery {
   border: 1px solid rgba(0, 0, 0, 0.6);
@@ -223,4 +239,109 @@
   margin: 19px 0px;
 
   gap: 14px;
+}
+.dilevry-con h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.dilevry-con p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.Limited-mesge {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cd2828;
+}
+.sigle-product {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 44px;
+}
+.signle-Account {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+.single-left {
+  display: flex;
+  width: 60%;
+  gap: 16px;
+}
+.single-Right {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  gap: 22px;
+}
+.title-div h2 {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+.star-con {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prices {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+.radiobutton {
+  display: flex;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  align-items: center;
+  gap: 10px;
+}
+.ant-radio-button-wrapper:not(:first-child)::before {
+  display: none;
+}
+.sixe-dev {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sixe-dev p {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+.size-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgb(87, 86, 86);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.sigle-product .single-Right .sixe-dev .size-btn:hover {
+  background: #db4444;
+  color: #ffffff;
+  border: none;
+}
+.buy-div {
+  display: flex;
+  gap: 22px;
+}
+.buy-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 44px;
+  width: 164px;
+  background: rgb(219, 68, 68);
+  color: white;
+}
+.sigle-product .single-Right .buy-div .buy-btn:hover {
+  background: #cd2828;
+  color: #ffffff;
+  border: none;
 }

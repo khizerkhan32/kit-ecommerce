@@ -2,55 +2,20 @@ import { Button } from 'antd';
 
 const Productsize = () => {
   return (
-    <div style={{ display: 'flex' }}>
-      <div>
+    <div className="sixe-dev">
+      <div style={{ marginRight: '10px' }}>
         <p>Size:</p>
       </div>
+      <Button className="size-btn">XS</Button>
+      <Button className="size-btn">S</Button>
       <Button
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '1px solid rgb(245, 245, 245, )',
-        }}
-      >
-        XS
-      </Button>
-      <Button
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '1px solid rgb(245, 245, 245, )',
-        }}
-      >
-        S
-      </Button>
-      <Button
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '1px solid rgb(245, 245, 245, )',
-        }}
+        className="size-btn"
+        style={{ backgroundColor: '#db4444', color: 'white', border: 'none' }}
       >
         M
       </Button>
-      <Button
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '1px solid rgb(245, 245, 245, )',
-        }}
-      >
-        L
-      </Button>
-      <Button
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '1px solid rgb(245, 245, 245, )',
-        }}
-      >
-        XL
-      </Button>
+      <Button className="size-btn">L</Button>
+      <Button className="size-btn">XL</Button>
     </div>
   );
 };
