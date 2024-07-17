@@ -380,3 +380,16 @@
   height: 32px;
   border: 1.5px solid #00000066;
 }
+.cart-image {
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.cart-inner {
+  display: flex;
+  align-items: center;
+  width: 22%;
+  gap: 4px;
+}

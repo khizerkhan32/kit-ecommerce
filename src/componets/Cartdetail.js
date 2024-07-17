@@ -44,7 +44,7 @@ function Cartdetail() {
         Home / <span style={{ color: 'black' }}>Cart</span>
       </div>
       <div className="Buy-con">
-        <div>Product</div>
+        <div className="cart-inner">Product</div>
         <div>Price</div>
         <div>Quantity</div>
         <div>Subtotal</div>
@@ -55,7 +55,15 @@ function Cartdetail() {
         <div>
           {products.map((product, index) => (
             <div key={index} className="Buy-pro">
-              <div>
+              <div className="cart-inner">
+                <div
+                  className="cart-image"
+                  style={{
+                    backgroundImage: `url(${
+                      product.images && product.images[0]
+                    })`,
+                  }}
+                ></div>
                 <div>{product.title}</div>
               </div>
               <div>
@@ -82,6 +90,7 @@ function Cartdetail() {
           ))}
         </div>
       )}
+      <div></div>
     </div>
   );
 }
