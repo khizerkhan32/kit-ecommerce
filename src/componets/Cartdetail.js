@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
+import { Button } from 'antd';
 
 function Cartdetail() {
   const [products, setProducts] = useState([]);
@@ -90,7 +91,14 @@ function Cartdetail() {
           ))}
         </div>
       )}
-      <div></div>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <Button className="">Return To Shop</Button>
+        </div>
+        <div>
+          <Button>Update Cart</Button>
+        </div>
+      </div>
     </div>
   );
 }
