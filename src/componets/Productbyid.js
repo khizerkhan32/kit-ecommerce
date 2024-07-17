@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Flex, Spin, Rate } from 'antd';
 import Radiobutton from './Radiobutton';
 import Productsize from './Productsize';
@@ -17,46 +17,54 @@ const content = <div style={contentStyle} />;
 
 function Productbyid() {
   const params = useParams();
+  const navigate = useNavigate();
   const [productone, setProductone] = useState({
     category: '',
     name: '',
     images: [],
   });
+  const [quantity, setQuantity] = useState(1);
   const [get_Product_by_id, loading] = useAPI(APIS.get_Product_by_id);
   const [mainImageUrl, setMainImageUrl] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     get_Product_by_id(params.id)
       .then(({ data }) => {
-        console.log(data);
         setProductone(data);
         setMainImageUrl(data.images.length > 0 ? data.images[0] : '');
       })
       .catch((err) => console.log(err));
   }, [params.id]);
 
-  const ImageUrltwo = productone.images.length > 0 ? productone.images[1] : '';
-  const ImageUrlthree =
-    productone.images.length > 0 ? productone.images[2] : '';
-  const ImageUrlfour = productone.images.length > 0 ? productone.images[3] : '';
-  const ImageUrlfive = productone.images.length > 0 ? productone.images[0] : '';
-
   const handleImageClick = (imageUrl) => {
     setMainImageUrl(imageUrl);
   };
 
-  const increaseQuantity = () => {
+  const handleBuyNow = () => {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productIndex = existingCart.findIndex(
+      (product) => product.id === params.id
+    );
+
+    if (productIndex > -1) {
+      existingCart[productIndex].quantity += quantity;
+    } else {
+      existingCart.push({ id: params.id, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(existingCart));
+    navigate('/Cart');
+  };
+
+  const handleIncrease = () => {
     if (quantity < productone.stock) {
       setQuantity(quantity + 1);
     } else {
-      setShowPopup(true);
-      setTimeout(() => setShowPopup(false), 5000);
+      alert('Limited stock. No more available.');
     }
   };
 
-  const decreaseQuantity = () => {
+  const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
@@ -82,7 +90,6 @@ function Productbyid() {
               <span style={{ color: 'black' }}> {productone.title}</span>
             </p>
           </div>
-
           <div
             style={{
               display: 'flex',
@@ -100,54 +107,19 @@ function Productbyid() {
                   gap: '15px',
                 }}
               >
-                {ImageUrltwo && (
+                {productone.images.map((imageUrl, index) => (
                   <div
+                    key={index}
                     className="backgroud-Image"
                     style={{
-                      backgroundImage: `url(${ImageUrltwo})`,
+                      backgroundImage: `url(${imageUrl})`,
                       width: '100%',
                       height: '138px',
                       cursor: 'pointer',
                     }}
-                    onClick={() => handleImageClick(ImageUrltwo)}
+                    onClick={() => handleImageClick(imageUrl)}
                   ></div>
-                )}
-                {ImageUrlthree && (
-                  <div
-                    className="backgroud-Image"
-                    style={{
-                      backgroundImage: `url(${ImageUrlthree})`,
-                      width: '100%',
-                      height: '138px',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleImageClick(ImageUrlthree)}
-                  ></div>
-                )}
-                {ImageUrlfour && (
-                  <div
-                    className="backgroud-Image"
-                    style={{
-                      backgroundImage: `url(${ImageUrlfour})`,
-                      width: '100%',
-                      height: '138px',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleImageClick(ImageUrlfour)}
-                  ></div>
-                )}
-                {ImageUrlfive && (
-                  <div
-                    className="backgroud-Image"
-                    style={{
-                      backgroundImage: `url(${ImageUrlfive})`,
-                      width: '100%',
-                      height: '138px',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleImageClick(ImageUrlfive)}
-                  ></div>
-                )}
+                ))}
               </div>
               <div
                 style={{
@@ -170,7 +142,6 @@ function Productbyid() {
                 )}
               </div>
             </div>
-
             <div className="single-Right">
               <div className="title-div">
                 <h2>{productone.title}</h2>
@@ -200,36 +171,33 @@ function Productbyid() {
                 <div style={{ display: 'flex' }}>
                   <Button
                     className="multiple"
+                    onClick={handleDecrease}
                     style={{
                       borderTopRightRadius: '0px',
                       borderBottomRightRadius: '0px',
                     }}
-                    onClick={decreaseQuantity}
                   >
                     <GoDash style={{ width: '24px', height: '24px' }} />
                   </Button>
                   <div className="buy-number">{quantity}</div>
                   <Button
                     className="multiple"
+                    onClick={handleIncrease}
                     style={{
                       borderTopLeftRadius: '0px',
                       borderBottomLeftRadius: '0px',
                     }}
-                    onClick={increaseQuantity}
                   >
                     <HiOutlinePlus style={{ width: '24px', height: '24px' }} />
                   </Button>
                 </div>
-                <Button className="buy-btn">Buy Now</Button>
+                <Button className="buy-btn" onClick={handleBuyNow}>
+                  Buy Now
+                </Button>
                 <Button className="heartbutton">
                   <FaRegHeart style={{ width: '22px', height: '22px' }} />
                 </Button>
               </div>
-              {showPopup && (
-                <div className="Limited-mesge">
-                  Limited stock. No more available.
-                </div>
-              )}
               <div className="delivery">
                 <div className="dilevry-con">
                   <div>
