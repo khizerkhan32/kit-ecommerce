@@ -620,3 +620,9 @@
 .coupon-section button {
   padding: 10px;
 }
+
+.card-set {
+  display: flex;
+
+  justify-content: space-between;
+}

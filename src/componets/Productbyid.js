@@ -213,7 +213,7 @@ function Productbyid() {
                 </div>
                 <div className="dilevry-con">
                   <div>
-                    <img src={'/images/icon-return.svg'} alt="return Icon" />
+                    <img src={'/images/Icon-returnss.svg'} alt="return Icon" />
                   </div>
                   <div>
                     <h3>Return Delivery</h3>

@@ -196,11 +196,24 @@ function CheckProduct() {
               </div>
               <div className="payment-method">
                 <Radio.Group className="payment-radio" defaultValue="cod">
-                  <div>
+                  <div className='card-set' >
                     <div>
                       <Radio value="bank">Bank</Radio>
                     </div>
-                    <div></div>
+                    <div>
+                      <div>
+                        <img src={'/images/1.png'} alt="return Icon" />
+                      </div>
+                      <div>
+                        <img src={'/images/2.png'} alt="return Icon" />
+                      </div>
+                      <div>
+                        <img src={'/images/3.png'} alt="return Icon" />
+                      </div>
+                      <div>
+                        <img src={'/images/4.png'} alt="return Icon" />
+                      </div>
+                    </div>
                   </div>
                   <div>
                     <Radio value="cod">Cash on delivery</Radio>
