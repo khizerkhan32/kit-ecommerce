@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
-import { Button, Input, Radio } from 'antd';
+import { Button, Radio } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 function CheckProduct() {
@@ -12,6 +12,7 @@ function CheckProduct() {
   );
   const [discountMessage, setDiscountMessage] = useState('');
   const [get_Product_by_cart, loading] = useAPI(APIS.get_Product_by_id);
+  const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,74 +60,167 @@ function CheckProduct() {
   };
 
   const handlePlaceOrder = () => {
-    navigate('/Checkout'); // Redirect to the actual checkout page
+    navigate('/Checkout');
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
     <div className="checkout-container">
-      <div className="billing-details">
-        <h2>Billing Details</h2>
-        <Input placeholder="First Name*" />
-        <Input placeholder="Company Name" />
-        <Input placeholder="Street Address*" />
-        <Input placeholder="Apartment, floor, etc. (optional)" />
-        <Input placeholder="Town/City*" />
-        <Input placeholder="Phone Number*" />
-        <Input placeholder="Email Address*" />
-        <div>
-          <Input type="checkbox" /> Save this information for faster check-out
-          next time
+      <div>
+        <div className="signle-Account">
+          Home / My Account / Product / View Cart /
+          <span style={{ color: 'black' }}> CheckOut</span>
         </div>
       </div>
-      <div className="order-details">
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
+      <div className="bliling-con">
+        <div className="billing-details">
           <div>
-            {products.map((product, index) => (
-              <div key={index} className="order-item">
-                <div>{product.title}</div>
-                <div>${product.price}</div>
-              </div>
-            ))}
-            <div className="order-summary">
-              <div>
-                <p>Subtotal:</p>
-                <p>${total.toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Shipping:</p>
-                <p>Free</p>
-              </div>
-              {discountMessage && (
-                <div>
-                  <p>{discountMessage}</p>
-                </div>
-              )}
-              <div>
-                <p>Total:</p>
-                <p>${discountedTotal.toFixed(2)}</p>
-              </div>
-            </div>
-            <div className="payment-method">
-              <Radio.Group defaultValue="cod">
-                <Radio value="bank">Bank</Radio>
-                <Radio value="cod">Cash on delivery</Radio>
-              </Radio.Group>
-            </div>
-            <div className="coupon-section">
-              <Input
-                placeholder="Coupon Code"
-                value={couponCode}
-                onChange={(e) => setCouponCode(e.target.value)}
-              />
-              <Button onClick={applyCoupon}>Apply Coupon</Button>
-            </div>
-            <Button type="primary" onClick={handlePlaceOrder}>
-              Place Order
-            </Button>
+            <h2>Billing Details</h2>
           </div>
-        )}
+          <div>
+            <div>
+              <p>First Name*</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Company Name</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Street Address*</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Apartment, floor, etc. (optional)</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Town/City*</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Phone Number*</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Email Address*</p>
+            </div>
+            <div>
+              <input />
+            </div>
+          </div>
+          <div className="check-div">
+            <div>
+              <input
+                type="checkbox"
+                className="custom-checkbox"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+            </div>
+            <div>
+              <p style={{ color: '#000000' }}>
+                Save this information for faster check-out next time
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="order-details">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              {products.map((product, index) => (
+                <div key={index} className="order-item">
+                  <div style={{ width: '58%' }} className="cart-inner">
+                    <div
+                      className="cart-image"
+                      style={{
+                        width: '40px',
+                        height: '36px',
+                        backgroundImage: `url(${
+                          product.images && product.images[0]
+                        })`,
+                      }}
+                    ></div>
+                    <div>{product.title}</div>
+                  </div>
+                  <div>${product.price}</div>
+                </div>
+              ))}
+              <div className="order-summary">
+                <div>
+                  <p>Subtotal:</p>
+                  <p>${total.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p>Shipping:</p>
+                  <p>Free</p>
+                </div>
+                {discountMessage && (
+                  <div>
+                    <p>{discountMessage}</p>
+                  </div>
+                )}
+                <div style={{ border: 'none' }}>
+                  <p>Total:</p>
+                  <p>${discountedTotal.toFixed(2)}</p>
+                </div>
+              </div>
+              <div className="payment-method">
+                <Radio.Group className="payment-radio" defaultValue="cod">
+                  <div>
+                    <div>
+                      <Radio value="bank">Bank</Radio>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div>
+                    <Radio value="cod">Cash on delivery</Radio>
+                  </div>
+                </Radio.Group>
+              </div>
+              <div className="coupon-section">
+                <input
+                  placeholder="Coupon Code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                />
+                <Button onClick={applyCoupon}>Apply Coupon</Button>
+              </div>
+              <Button type="primary" onClick={handlePlaceOrder}>
+                Place Order
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

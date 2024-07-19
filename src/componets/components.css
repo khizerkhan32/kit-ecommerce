@@ -508,29 +508,76 @@
 
 .checkout-container {
   display: flex;
+
+  width: 80%;
+  flex-direction: column;
+}
+
+.bliling-con {
+  display: flex;
   justify-content: space-between;
 }
 
 .billing-details {
-  flex: 1;
-  margin-right: 20px;
+  width: 40%;
 }
 
 .billing-details h2 {
-  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
 }
 
 .billing-details input {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  border-radius: 4px;
+  border: none;
   padding: 10px;
+  background-color: #f5f5f5;
 }
-
+.billing-details p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+.check-div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .order-details {
-  flex: 1;
+  width: 40%;
 }
+/* :where(.css-dev-only-do-not-override-f7vrd6).ant-input-outlined:hover {
+  border-color: #db4444;
+  background-color: #ffffff;
+} */
 
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  appearance: none;
+  background-color: blue; /* Default color */
+  border: 2px solid #000;
+  cursor: pointer;
+  position: relative;
+}
+.custom-checkbox:checked {
+  background-color: #db4444;
+  color: #f5f5f5;
+}
+.custom-checkbox:checked::after {
+  content: '✓'; /* Unicode for checkmark */
+  color: white; /* Checkmark color */
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 .order-item {
   display: flex;
   justify-content: space-between;
@@ -538,17 +585,25 @@
 }
 
 .order-summary {
-  border-top: 1px solid #000;
-  padding-top: 10px;
+  /* border-top: 1px solid #000;
+  padding-top: 10px; */
 }
 
 .order-summary div {
   display: flex;
+  height: 42px;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.payment-method {
+/* .payment-method {
   margin-top: 20px;
+} */
+.payment-radio {
+  display: flex;
+  flex-direction: column;
 }
 
 .coupon-section {
