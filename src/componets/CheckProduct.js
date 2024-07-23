@@ -156,81 +156,95 @@ function CheckProduct() {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <div>
-              {products.map((product, index) => (
-                <div key={index} className="order-item">
-                  <div style={{ width: '58%' }} className="cart-inner">
-                    <div
-                      className="cart-image"
-                      style={{
-                        width: '40px',
-                        height: '36px',
-                        backgroundImage: `url(${
-                          product.images && product.images[0]
-                        })`,
-                      }}
-                    ></div>
-                    <div>{product.title}</div>
+            <div className='billing-left' >
+              <div style={{ width: '76%' }}>
+                {products.map((product, index) => (
+                  <div key={index} className="order-item">
+                    <div style={{ width: '58%' }} className="cart-inner">
+                      <div
+                        className="cart-image"
+                        style={{
+                          width: '40px',
+                          height: '36px',
+                          backgroundImage: `url(${
+                            product.images && product.images[0]
+                          })`,
+                        }}
+                      ></div>
+                      <div>{product.title}</div>
+                    </div>
+                    <div>${product.price}</div>
                   </div>
-                  <div>${product.price}</div>
-                </div>
-              ))}
-              <div className="order-summary">
-                <div>
-                  <p>Subtotal:</p>
-                  <p>${total.toFixed(2)}</p>
-                </div>
-                <div>
-                  <p>Shipping:</p>
-                  <p>Free</p>
-                </div>
-                {discountMessage && (
+                ))}
+                <div className="order-summary">
                   <div>
-                    <p>{discountMessage}</p>
-                  </div>
-                )}
-                <div style={{ border: 'none' }}>
-                  <p>Total:</p>
-                  <p>${discountedTotal.toFixed(2)}</p>
-                </div>
-              </div>
-              <div className="payment-method">
-                <Radio.Group className="payment-radio" defaultValue="cod">
-                  <div className='card-set' >
-                    <div>
-                      <Radio value="bank">Bank</Radio>
-                    </div>
-                    <div>
-                      <div>
-                        <img src={'/images/1.png'} alt="return Icon" />
-                      </div>
-                      <div>
-                        <img src={'/images/2.png'} alt="return Icon" />
-                      </div>
-                      <div>
-                        <img src={'/images/3.png'} alt="return Icon" />
-                      </div>
-                      <div>
-                        <img src={'/images/4.png'} alt="return Icon" />
-                      </div>
-                    </div>
+                    <p>Subtotal:</p>
+                    <p>${total.toFixed(2)}</p>
                   </div>
                   <div>
-                    <Radio value="cod">Cash on delivery</Radio>
+                    <p>Shipping:</p>
+                    <p>Free</p>
                   </div>
-                </Radio.Group>
+                  {discountMessage && (
+                    <div>
+                      <p>{discountMessage}</p>
+                    </div>
+                  )}
+                  <div style={{ border: 'none' }}>
+                    <p>Total:</p>
+                    <p>${discountedTotal.toFixed(2)}</p>
+                  </div>
+                </div>
+                <div className="payment-method">
+                  <Radio.Group className="payment-radio" defaultValue="cod">
+                    <div className="card-set">
+                      <div>
+                        <Radio value="bank">Bank</Radio>
+                      </div>
+                      <div className="Image-div">
+                        <div>
+                          <img src={'/images/1.png'} alt="return Icon" />
+                        </div>
+                        <div>
+                          <img src={'/images/2.png'} alt="return Icon" />
+                        </div>
+                        <div>
+                          <img src={'/images/3.png'} alt="return Icon" />
+                        </div>
+                        <div>
+                          <img src={'/images/4.png'} alt="return Icon" />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <Radio value="cod">Cash on delivery</Radio>
+                    </div>
+                  </Radio.Group>
+                </div>
               </div>
-              <div className="coupon-section">
-                <input
-                  placeholder="Coupon Code"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
-                />
-                <Button onClick={applyCoupon}>Apply Coupon</Button>
+              <div className="coupon-div">
+                <div className="coupon-section">
+                  <div>
+                    <input
+                      placeholder="Coupon Code"
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Button onClick={applyCoupon} className="checkout-btns">
+                      Apply Coupon
+                    </Button>
+                  </div>
+                </div>
+                <Button
+                  type="primary"
+                  className="checkout-btns"
+                  onClick={handlePlaceOrder}
+                >
+                  Place Order
+                </Button>
               </div>
-              <Button type="primary" onClick={handlePlaceOrder}>
-                Place Order
-              </Button>
             </div>
           )}
         </div>

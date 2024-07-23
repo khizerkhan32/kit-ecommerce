@@ -452,6 +452,11 @@
   color: #ffffff;
   border: none;
 }
+.order-details .billing-left .coupon-div .checkout-btns:hover {
+  background: #cd2828;
+  color: #ffffff;
+  border: none;
+}
 .checkout-box {
   display: flex;
   flex-direction: column;
@@ -609,12 +614,11 @@
 .coupon-section {
   display: flex;
   align-items: center;
-  margin-top: 20px;
 }
 
 .coupon-section input {
-  margin-right: 10px;
   padding: 10px;
+  height: 56px;
 }
 
 .coupon-section button {
@@ -625,4 +629,8 @@
   display: flex;
 
   justify-content: space-between;
+}
+.Image-div {
+  display: flex;
+  gap: 12px;
 }
