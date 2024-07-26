@@ -13,6 +13,7 @@ function CheckProduct() {
   const [discountMessage, setDiscountMessage] = useState('');
   const [get_Product_by_cart, loading] = useAPI(APIS.get_Product_by_id);
   const [isChecked, setIsChecked] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,7 +61,31 @@ function CheckProduct() {
   };
 
   const handlePlaceOrder = () => {
-    navigate('/Checkout');
+    const firstName = document.querySelector(
+      'input[placeholder="First Name*"]'
+    ).value;
+    const phoneNumber = document.querySelector(
+      'input[placeholder="Phone Number*"]'
+    ).value;
+    const emailAddress = document.querySelector(
+      'input[placeholder="Email Address*"]'
+    ).value;
+    const errors = {};
+
+    if (!firstName) errors.firstName = 'Please provide the required data';
+    if (!phoneNumber || !/^\d+$/.test(phoneNumber) || phoneNumber.length !== 11)
+      errors.phoneNumber = 'Wrong Phone Number';
+    if (!emailAddress.includes('@') || !emailAddress.endsWith('.com'))
+      errors.emailAddress = 'Wrong Email Address';
+
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      localStorage.clear();
+      // Show animated congratulations popup
+      alert('Congratulations! Your order has been placed.');
+      navigate('/');
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -85,7 +110,10 @@ function CheckProduct() {
               <p>First Name*</p>
             </div>
             <div>
-              <input />
+              <input placeholder="First Name*" />
+              {formErrors.firstName && (
+                <div className="error-message">{formErrors.firstName}</div>
+              )}
             </div>
           </div>
           <div>
@@ -93,7 +121,7 @@ function CheckProduct() {
               <p>Company Name</p>
             </div>
             <div>
-              <input />
+              <input placeholder="Company Name" />
             </div>
           </div>
           <div>
@@ -101,7 +129,7 @@ function CheckProduct() {
               <p>Street Address*</p>
             </div>
             <div>
-              <input />
+              <input placeholder="Street Address" />
             </div>
           </div>
           <div>
@@ -109,7 +137,7 @@ function CheckProduct() {
               <p>Apartment, floor, etc. (optional)</p>
             </div>
             <div>
-              <input />
+              <input placeholder="Apartment, floor, etc. (optional)" />
             </div>
           </div>
           <div>
@@ -117,15 +145,18 @@ function CheckProduct() {
               <p>Town/City*</p>
             </div>
             <div>
-              <input />
+              <input placeholder="Town/City" />
             </div>
           </div>
           <div>
             <div>
               <p>Phone Number*</p>
             </div>
-            <div>
-              <input />
+            <div className='input-number' >
+              <input placeholder="Phone Number*" type="number" />
+              {formErrors.phoneNumber && (
+                <div className="error-message">{formErrors.phoneNumber}</div>
+              )}
             </div>
           </div>
           <div>
@@ -133,7 +164,10 @@ function CheckProduct() {
               <p>Email Address*</p>
             </div>
             <div>
-              <input />
+              <input placeholder="Email Address*" />
+              {formErrors.emailAddress && (
+                <div className="error-message">{formErrors.emailAddress}</div>
+              )}
             </div>
           </div>
           <div className="check-div">
@@ -156,7 +190,7 @@ function CheckProduct() {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <div className='billing-left' >
+            <div className="billing-left">
               <div style={{ width: '76%' }}>
                 {products.map((product, index) => (
                   <div key={index} className="order-item">
@@ -224,26 +258,28 @@ function CheckProduct() {
               </div>
               <div className="coupon-div">
                 <div className="coupon-section">
-                  <div>
+                  <div style={{ width: '52%' }}>
                     <input
                       placeholder="Coupon Code"
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                     />
                   </div>
-                  <div>
+                  <div style={{ width: '38%' }}>
                     <Button onClick={applyCoupon} className="checkout-btns">
                       Apply Coupon
                     </Button>
                   </div>
                 </div>
-                <Button
-                  type="primary"
-                  className="checkout-btns"
-                  onClick={handlePlaceOrder}
-                >
-                  Place Order
-                </Button>
+                <div style={{ width: '46%' }}>
+                  <Button
+                    type="primary"
+                    className="checkout-btns"
+                    onClick={handlePlaceOrder}
+                  >
+                    Place Order
+                  </Button>
+                </div>
               </div>
             </div>
           )}

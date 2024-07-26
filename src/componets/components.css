@@ -439,7 +439,7 @@
 .checkout-btns {
   height: 48px;
   background: #db4444;
-
+  width: 100%;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -614,11 +614,13 @@
 .coupon-section {
   display: flex;
   align-items: center;
+  gap: 16px;
 }
 
 .coupon-section input {
   padding: 10px;
-  height: 56px;
+  width: 100%;
+  height: 46px;
 }
 
 .coupon-section button {
@@ -633,4 +635,13 @@
 .Image-div {
   display: flex;
   gap: 12px;
+}
+
+.input-number input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-number input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
