@@ -2,6 +2,7 @@ import './components.css';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -12,7 +13,9 @@ const Header = () => {
         </div>
 
         <ul className="links">
-          <li>Home</li>
+          <Link to={{ pathname: '/' }}>
+            <li>Home</li>{' '}
+          </Link>
           <li>Contact</li>
           <li>About</li>
           <li>Signup</li>

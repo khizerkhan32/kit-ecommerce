@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
 import { Button, Flex, Spin } from 'antd';
 import { ImCross } from 'react-icons/im';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const contentStyle = {
   padding: 50,
@@ -200,7 +200,9 @@ function Cartdetail() {
       )}
       <div className="return-div">
         <div>
-          <Button className="return-btn">Return To Shop</Button>
+          <Link to={{ pathname: '/' }}>
+            <Button className="return-btn">Return To Shop</Button>
+          </Link>
         </div>
         <div>
           <Button className="return-btn" onClick={updateCart}>

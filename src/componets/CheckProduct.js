@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { APIS, useAPI } from '../apis/config';
-import { Button, Radio } from 'antd';
+import { Button, Radio, Modal, Flex, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
+const contentStyle = {
+  padding: 50,
+  background: 'rgba(0, 0, 0, 0.05)',
+  borderRadius: 4,
+};
+const content = <div style={contentStyle} />;
 
 function CheckProduct() {
   const [products, setProducts] = useState([]);
@@ -14,6 +21,8 @@ function CheckProduct() {
   const [get_Product_by_cart, loading] = useAPI(APIS.get_Product_by_id);
   const [isChecked, setIsChecked] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [paymentMethod, setPaymentMethod] = useState('cod');
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,8 +70,22 @@ function CheckProduct() {
   };
 
   const handlePlaceOrder = () => {
+    if (paymentMethod === 'bank') {
+      alert('Online banking not available right now.');
+      return;
+    }
+
     const firstName = document.querySelector(
       'input[placeholder="First Name*"]'
+    ).value;
+    const companyName = document.querySelector(
+      'input[placeholder="Company Name"]'
+    ).value;
+    const streetAddress = document.querySelector(
+      'input[placeholder="Street Address"]'
+    ).value;
+    const townCity = document.querySelector(
+      'input[placeholder="Town/City"]'
     ).value;
     const phoneNumber = document.querySelector(
       'input[placeholder="Phone Number*"]'
@@ -73,6 +96,10 @@ function CheckProduct() {
     const errors = {};
 
     if (!firstName) errors.firstName = 'Please provide the required data';
+    if (!companyName) errors.companyName = 'Please provide the required data';
+    if (!streetAddress)
+      errors.streetAddress = 'Please provide the required data';
+    if (!townCity) errors.townCity = 'Please provide the required data';
     if (!phoneNumber || !/^\d+$/.test(phoneNumber) || phoneNumber.length !== 11)
       errors.phoneNumber = 'Wrong Phone Number';
     if (!emailAddress.includes('@') || !emailAddress.endsWith('.com'))
@@ -82,14 +109,22 @@ function CheckProduct() {
 
     if (Object.keys(errors).length === 0) {
       localStorage.clear();
-      // Show animated congratulations popup
-      alert('Congratulations! Your order has been placed.');
-      navigate('/');
+      setIsModalVisible(true);
     }
   };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleModalOk = () => {
+    setIsModalVisible(false);
+    navigate('/');
+  };
+
+  const handleModalCancel = () => {
+    setIsModalVisible(false);
+    navigate('/');
   };
 
   return (
@@ -122,6 +157,9 @@ function CheckProduct() {
             </div>
             <div>
               <input placeholder="Company Name" />
+              {formErrors.companyName && (
+                <div className="error-message">{formErrors.companyName}</div>
+              )}
             </div>
           </div>
           <div>
@@ -130,6 +168,9 @@ function CheckProduct() {
             </div>
             <div>
               <input placeholder="Street Address" />
+              {formErrors.streetAddress && (
+                <div className="error-message">{formErrors.streetAddress}</div>
+              )}
             </div>
           </div>
           <div>
@@ -146,14 +187,17 @@ function CheckProduct() {
             </div>
             <div>
               <input placeholder="Town/City" />
+              {formErrors.townCity && (
+                <div className="error-message">{formErrors.townCity}</div>
+              )}
             </div>
           </div>
           <div>
             <div>
               <p>Phone Number*</p>
             </div>
-            <div className='input-number' >
-              <input placeholder="Phone Number*" type="number" />
+            <div>
+              <input placeholder="Phone Number*" />
               {formErrors.phoneNumber && (
                 <div className="error-message">{formErrors.phoneNumber}</div>
               )}
@@ -188,10 +232,18 @@ function CheckProduct() {
         </div>
         <div className="order-details">
           {loading ? (
-            <div>Loading...</div>
+            <div className="spiner-con">
+              <Flex gap="small" vertical>
+                <Flex gap="small">
+                  <Spin tip="Loading" size="large">
+                    {content}
+                  </Spin>
+                </Flex>
+              </Flex>
+            </div>
           ) : (
             <div className="billing-left">
-              <div style={{ width: '76%' }}>
+              <div className="billing-left-con">
                 {products.map((product, index) => (
                   <div key={index} className="order-item">
                     <div style={{ width: '58%' }} className="cart-inner">
@@ -230,7 +282,11 @@ function CheckProduct() {
                   </div>
                 </div>
                 <div className="payment-method">
-                  <Radio.Group className="payment-radio" defaultValue="cod">
+                  <Radio.Group
+                    className="payment-radio"
+                    defaultValue="cod"
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  >
                     <div className="card-set">
                       <div>
                         <Radio value="bank">Bank</Radio>
@@ -285,6 +341,19 @@ function CheckProduct() {
           )}
         </div>
       </div>
+
+      <Modal
+        // title="Congratulations!"
+        visible={isModalVisible}
+        onOk={handleModalOk}
+        onCancel={handleModalCancel}
+        footer={null}
+        className="congrats-animation"
+      >
+        <div className="congrats-text">
+          Congratulations! Your order has been placed.
+        </div>
+      </Modal>
     </div>
   );
 }

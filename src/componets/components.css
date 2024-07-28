@@ -513,7 +513,7 @@
 
 .checkout-container {
   display: flex;
-
+  gap: 50px;
   width: 80%;
   flex-direction: column;
 }
@@ -525,6 +525,9 @@
 
 .billing-details {
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .billing-details h2 {
@@ -545,12 +548,18 @@
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(29, 28, 28, 0.5);
 }
 .check-div {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.billing-left {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 18%;
 }
 .order-details {
   width: 40%;
@@ -609,6 +618,13 @@
 .payment-radio {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+.billing-left-con {
+  width: 76%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .coupon-section {
@@ -626,7 +642,11 @@
 .coupon-section button {
   padding: 10px;
 }
-
+.coupon-div {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
 .card-set {
   display: flex;
 
@@ -644,4 +664,45 @@
 .input-number input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.error-message {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: red;
+}
+/* styles.css */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.congrats-animation {
+  animation: fadeIn 1s ease-out, slideIn 1s ease-out;
+}
+
+.congrats-text {
+  font-size: 24px;
+  color: #4caf50;
+  text-align: center;
+  margin-top: 20px;
+}
+.billing-details input::placeholder {
+  color: transparent;
 }
